@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 ">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const chisla = "0123456789";
+        function containsNum(str) {
+            for (let char of str) {
+                if (chisla.includes(char)) {
+                    return true;  
+                }
+            }
+            return false;  
+        }
+        let name = prompt("введите вашу имя");
+        while (
+            name === null ||
+            name.trim() === "" ||
+            containsNum(name.trim())
+        ) {
+            alert("ошибка,имя не должна содержать цифры и не должна пустой.");
+            name = prompt("введите вашу имя");
+        }
+        let surname = prompt("введите вашу фамилию");
+        while (
+            surname === null ||
+            surname.trim() === "" ||
+            containsNum(surname.trim())
+        ) {
+            alert("ошибка,фамилия не должна содержать цифры и не должна пустой.");
+            surname = prompt("введите вашу фамилию");
+        }
+        let age;
+        do{
+            age = +prompt("введите ваш возраст в годах")
+            if (age <= 0 || age >= 110 || isNaN(age)|| !Number.isInteger(age)){
+                alert("возраст должен быть больше 0 и меньше или равен 110 ");
+                age = +prompt("введите ваш возраст в годах");
+            }
+        }while (age <= 0 || age > 110 || isNaN(age)|| !Number.isInteger(age));
+        alert(`Ваш возраст: ${age}`);
+        let pen = confirm("вы мужчина?"); 
+        let pol = pen ? "мужчина" : "женщина";
+        let ageInDays = age * 365;
+        let inFive = age + 5;
+        let pensia;
+        if(pol === "мужчина" && age > 65 || pol === "женщина" && age >62){
+            pensia = "вы на пенсии";
+        }else{
+            pensia = "вы НЕ на пенсии";
+        }
+        alert(pensia);
+        alert(
+        `ваше ФИО: ${surname} ${name}\n` +
+        `ваш возраст в годах: ${age}\n` +
+        `ваш возраст в днях: ${ageInDays}\n` +
+        `через 5 лет вам будет: ${inFive}\n` +
+        `ваш пол: ${pol}\n` +
+        `вы на пенсии: ${pensia}`
+    );
+        
+
+
+        
+        
+
+    
+
+    </script>
+</body>
+</html>
