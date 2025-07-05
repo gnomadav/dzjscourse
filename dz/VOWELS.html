@@ -7,18 +7,30 @@
 </head>
 <body>
     <script>
-        const glasnye = "аеёиоуыэюяАЕЁИОУЫЭЮЯ"
-        function schet(a){
-            let count=0;
-            for(let bukva of a){
-                if(glasnye.includes(bukva)){
-                    count++;
+        function massive(a){
+            let sum=0;
+            for (let element of a) {
+                if (Array.isArray(element)) {
+                sum += massive(element); 
+                } else if (typeof element === "number") {
+                     sum += element;
+                } else {
+                    alert("Неправильный массив!!! Переделай");
                 }
             }
-            return count;
+            return sum;
         }
-        abvh = prompt("Напишите фразу на русском");
-        console.log(schet(abvh));
+        const test =  [ 5, 7, 
+        [ 4, [2], 8, [1,3], 2 ], 
+        [ 9, [] ], 
+        1, 8 ];
+        
+        console.log(massive(test));
+
     </script>
 </body>
 </html>
+
+
+                
+            
