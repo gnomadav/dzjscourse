@@ -9,16 +9,13 @@
     <script>
         function massive(a){
             let sum=0;
-            
-            for(let element of a){
-                if (typeof element==="number"){
-                    if(Array.isArray(element)){
-                        sum+=massive(element);
-                    }else{
-                        sum+=element;
-                    }
-                }else{
-                    alert("Неправильный массив!!!Переделай")
+            for (let element of a) {
+                if (Array.isArray(element)) {
+                sum += massive(element); 
+                } else if (typeof element === "number") {
+                     sum += element;
+                } else {
+                    alert("Неправильный массив!!! Переделай");
                 }
             }
             return sum;
