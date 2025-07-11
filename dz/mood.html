@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    function randomDiap(n,m) {
+            return Math.floor(Math.random()*(m-n+1))+n;
+    }
+
+    function mood(colorsCount) {
+        const colors=[ '', 'красный', 'оранжевый', 'жёлтый', 'зелёный', 'голубой', 'синий', 'фиолетовый' ];
+        const cveta={};
+        console.log( 'цветов: ' + colorsCount );
+        for ( let i=1; i<=colorsCount;) {
+            const n=randomDiap(1,7);
+            const colorName=colors[n];
+            if(!(colorName in cveta)){//также можно было через массив просто поменяв na includes и потом push
+                cveta[colorName]=true;
+                console.log(colorName);
+                i++;
+                
+            }
+        }
+    }
+    mood(5);
+
+
+</script>
+</body>
+</html>
