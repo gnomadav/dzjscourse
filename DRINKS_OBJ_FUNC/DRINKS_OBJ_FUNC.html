@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function  ObjStorageFunc(){
+            const container = {};
+            const self = this;
+            self.addValue = function(key,value){
+                container[key] = value;
+            }
+            self.getValue = function(key){
+                return container[key];
+            }
+            self.deleteValue = function(key){
+                delete container[key];
+            }
+            self.getKeys = function(key){
+                return Object.keys(container);
+            }
+        }
+        const storage = new ObjStorageFunc;
+        function addDrink(){
+            const askName = prompt("Введите названия напитка!");
+            const name = askName.slice(0,1).toUpperCase() + askName.slice(1).toLowerCase();
+            const isAlcoh = confirm("Напиток алкогольный?");
+            const recepy = prompt("Введите рецепт")
+            if(recepy.trim() === ""){
+                recepy="Без рецепта";
+            }
+            storage.addValue(name,{alco:isAlcoh ? "да":"нет",recip: recepy});
+        }
+        function getDrink(){
+            const ask = prompt("Введите название напитка,который хотите узнать");
+            const drinkName = ask.slice(0,1).toUpperCase() + ask.slice(1).toLowerCase();
+            const getIt = storage.getValue(drinkName);
+            if (getIt){
+                alert(`напиток : ${drinkName},алкогольный ? ${getIt.alco} ,рецепт: ${getIt.recip}`)
+            }else{
+                alert("Не найден!!!")
+            }
+        }
+        function deleteDrink(){
+            const delName = prompt("Какой напиток удалить?");
+            const delInst = delName.slice(0,1).toUpperCase() + delName.slice(1).toLowerCase();
+            const delRes = storage.deleteValue(delInst);
+        }
+        function allDrinks(){
+            const drinks = storage.getKeys();
+            alert (drinks);
+        }
+        addDrink();
+        getDrink();
+        deleteDrink();
+        allDrinks();
+    </script>
+</body>
+</html>
