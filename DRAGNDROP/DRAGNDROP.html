@@ -10,8 +10,8 @@
 <img src='http://fe.it-academy.by/Sites/0000007/Man-and-woman.png' width=150>
 <img src='http://fe.it-academy.by/Sites/0000007/No_smoking.png' style='padding-left: 50px'>
         <script>
-            let shiftX=0;
-            let shiftY=0;
+            let X=0;
+            let Y=0;
             let IndexZ=1000;
             let imgMa =null;
             let positions = [];
@@ -58,16 +58,16 @@
                 eo.preventDefault();
                 imgMa = eo.target;
                 imgMa.style.zIndex = 1000000;
-                shiftX=eo.pageX - eo.target.offsetLeft;
-                shiftY=eo.pageY - eo.target.offsetTop;
+                X=eo.pageX - eo.target.offsetLeft;
+                Y=eo.pageY - eo.target.offsetTop;
                 document.addEventListener('mousemove',Drag);
                 document.addEventListener('mouseup',Drop);
             }
             function Drag(eo){
                 eo=eo||window.event;
                 eo.preventDefault();
-                imgMa.style.left = (eo.pageX - shiftX)+ 'px';
-                imgMa.style.top=(eo.pageY - shiftY) + 'px';
+                imgMa.style.left = (eo.pageX - X)+ 'px';
+                imgMa.style.top=(eo.pageY - Y) + 'px';
             }
             function Drop(eo){
                 eo=eo||window.event;
