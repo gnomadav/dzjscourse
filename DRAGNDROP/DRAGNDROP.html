@@ -9,74 +9,77 @@
 <img src='http://fe.it-academy.by/Sites/0000007/Yin_and_Yang.png' width=100 style='vertical-align: 20px'>
 <img src='http://fe.it-academy.by/Sites/0000007/Man-and-woman.png' width=150>
 <img src='http://fe.it-academy.by/Sites/0000007/No_smoking.png' style='padding-left: 50px'>
-        <script>
-            let X=0;
-            let Y=0;
-            let IndexZ=1000;
-            let imgMa =null;
-            let positions = [];
-            // document.querySelectorAll('img').forEach( img =>{
-            //     function getElementPos(element) {
-            //         const bbox=element.getBoundingClientRect();
-            //         return {
-            //             left: bbox.left+window.pageXOffset,
-            //             top: bbox.top+window.pageYOffset
-            //             };
-            //     }
-            //     const pos = getElementPos(img);
-            //     bo.style.position="absolute";
-            //     img.style.left=pos.left + 'px';
-            //     img.style.top=pos.top + 'px';
-            //     img.style.cursor = 'grab';
-            //     img.addEventListener('mousedown',Start);
-            // });
-                
+        <script>    
+            window.addEventListener('load', function() {
+                let X=0;
+                let Y=0;
+                let IndexZ=1000;
+                let imgMa =null;
+                let positions = [];
+                // document.querySelectorAll('img').forEach( img =>{
+                //     function getElementPos(element) {
+                //         const bbox=element.getBoundingClientRect();
+                //         return {
+                //             left: bbox.left+window.pageXOffset,
+                //             top: bbox.top+window.pageYOffset
+                //             };
+                //     }
+                //     const pos = getElementPos(img);
+                //     bo.style.position="absolute";
+                //     img.style.left=pos.left + 'px';
+                //     img.style.top=pos.top + 'px';
+                //     img.style.cursor = 'grab';
+                //     img.addEventListener('mousedown',Start);
+                // });
+                    
 
-            let images=document.querySelectorAll('img');
-            for (let i = 0; i < images.length; i++){
-                const img = images[i];
-                const bbox = img.getBoundingClientRect();
-                const left = bbox.left + window.pageXOffset;
-                const top = bbox.top + window.pageYOffset;
-                positions.push({
-                    index: i,
-                    left: left,
-                    top: top
-                });
-                img.style.cursor = 'grab';
-                img.addEventListener('mousedown',Start);
-            };
-            console.log('Сохранённые координаты:', positions);
-            for (let i = 0; i < images.length; i++){
-                const img = images[i];
-                img.style.position='absolute';
-                img.style.left=positions[i].left + 'px';
-                img.style.top=positions[i].top + 'px';
-            }
-            function Start(eo) {
-                eo=eo||window.event;
-                eo.preventDefault();
-                imgMa = eo.target;
-                imgMa.style.zIndex = 1000000;
-                X=eo.pageX - eo.target.offsetLeft;
-                Y=eo.pageY - eo.target.offsetTop;
-                document.addEventListener('mousemove',Drag);
-                document.addEventListener('mouseup',Drop);
-            }
-            function Drag(eo){
-                eo=eo||window.event;
-                eo.preventDefault();
-                imgMa.style.left = (eo.pageX - X)+ 'px';
-                imgMa.style.top=(eo.pageY - Y) + 'px';
-            }
-            function Drop(eo){
-                eo=eo||window.event;
-                eo.preventDefault();
-                imgMa.style.zIndex = IndexZ++;
-                document.removeEventListener('mousemove', Drag);
-                document.removeEventListener('mouseup',Drop);
-                imgMa = null;
-            }
+                let images=document.querySelectorAll('img');
+                for (let i = 0; i < images.length; i++){
+                    const img = images[i];
+                    const bbox = img.getBoundingClientRect();
+                    const left = bbox.left + window.pageXOffset;
+                    const top = bbox.top + window.pageYOffset;
+                    positions.push({
+                        index: i,
+                        left: left,
+                        top: top
+                    });
+                    img.style.cursor = 'grab';
+                    img.addEventListener('mousedown',Start);
+                    console.log('Сохранённые координаты:', positions);
+                };
+                for (let i = 0; i < images.length; i++){
+                    const img = images[i];
+                    img.style.position='absolute';
+                    img.style.left=positions[i].left + 'px';
+                    img.style.top=positions[i].top + 'px';
+                }
+                function Start(eo) {
+                    eo=eo||window.event;
+                    eo.preventDefault();
+                    imgMa = eo.target;
+                    imgMa.style.zIndex = 1000000;
+                    X=eo.pageX - eo.target.offsetLeft;
+                    Y=eo.pageY - eo.target.offsetTop;
+                    document.addEventListener('mousemove',Drag);
+                    document.addEventListener('mouseup',Drop);
+                }
+                function Drag(eo){
+                    eo=eo||window.event;
+                    eo.preventDefault();
+                    imgMa.style.left = (eo.pageX - X)+ 'px';
+                    imgMa.style.top=(eo.pageY - Y) + 'px';
+                }
+                function Drop(eo){
+                    eo=eo||window.event;
+                    eo.preventDefault();
+                    imgMa.style.zIndex = IndexZ++;
+                    document.removeEventListener('mousemove', Drag);
+                    document.removeEventListener('mouseup',Drop);
+                    imgMa = null;
+                }
+            })
+            
         </script>
 
     </body>
