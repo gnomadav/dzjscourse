@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="https://fe.it-academy.by/TestForm.php" name="validateform">
+        Разработчики: <input type="text" name="razr"  ><br><span id="razra"></span><br>
+        Название сайта: <input type="text" name="web" ><br><span id="weba"></span><br>
+        URL сайта: <input type="text" name="URL"><br><br><span id="URLa"></span><br>
+        дата запуска <input type="date" name="data"><br>
+        Посетителей в сутки: <input type="text" name="viewers"><br><br><span id="viewersa"></span><br>
+        e-mail для связи: <input type="text" name="email" ><br><br><span id="emaila"></span><br>
+        Рубрика каталога: <select name="katalog" id="">
+            <option value="здоровье"></option>
+            <option value="домашний уют">домашний уют</option>
+            <option value="бытовая техника">бытовая техника</option>
+        </select><br>
+        Размещение:	<input type="radio" name="position" value="1">бесплатное<br>
+        <input type="radio" name="position" value="2">платное<br>
+        <input type="radio" name="position" value="3">vip<br>
+        Разрешить отзывы: <input type="checkbox" value="opinion"><br>
+        Описание сайта: <textarea name="" id=""></textarea><br><br><span id="weba"></span><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <input type="submit">
+        
+    </form>
+    <script>
+        // function validRazr(isScroll){
+        //     let error=0;
+        //     const input=document.forms.validateform.elements.razr;
+        //     const spanchik=document.getElementById("razrab");
+        //     if (input.value){
+        //         spanchik.innerHTML="";
+        //     }else{
+        //         error++;
+        //         spanchik.innerHTML="заполните поле!";
+        //         if(isScroll){
+        //             input.focus();
+        //         }
+        //     }
+        // }
+        // function validWeb(isScroll){
+        //     let error=0;
+        //     const input=document.forms.validateform.elements.webName;
+        //     const spanchik=document.getElementById("web");
+        //     if (input.value){
+        //         spanchik.innerHTML="";
+        //     }else{
+        //         error++;
+        //         spanchik.innerHTML="заполните поле!";
+        //         if(isScroll){
+        //             input.focus();
+        //         }
+        //     }
+        // }
+        window.addEventListener("load",()=>{//ТАК КАК Я УЖЕ СМОТРЕЛ РАЗБОР ЗАДАНИЯ,РЕШИЛ УСЛОЖНИТЬ И СДНЕЛАТЬ ТОЛЬКО 1 ФУНКЦИЮ
+            const inputs = document.querySelectorAll("input[type=text]");
+            for(let i=0;i<inputs.length;i++){
+                const input=inputs[i];
+                input.addEventListener("blur",validRazr)
+            }
+            document.forms.validateform.addEventListener('submit',(eo)=>{
+                eo=eo||window.event;
+                let error=0;
+                const inputs = document.querySelectorAll("input[type=text]");//ПОСМОТРНЛ В ИНТЕРНЕТЕ КАК СДЕЛАТЬ ФЕЙКОВОЕ ДЕЙСТВИЕ { target: input }
+                for(let i=0;i<inputs.length;i++){
+                    const input=inputs[i];
+                    const fake = { target: input };
+                    const result = validRazr(fake, error === 0);//ПРИ Error>0 будет false и скролл не будет работать 
+                    if (!result) {
+                        error++;//при первой ошибке меняется error=1 => следовательно isScroll=false 
+                    }
+                }
+                if(error){
+                    eo.preventDefault();
+                }
+            })
+        })
+        function validRazr(eo,isScroll){
+            eo=eo||window.event;
+            const input=eo.target;
+            const spanId= input.name+"a";//решил каждый span называть с дополнительным name+"а",можно было сделать например "-error"
+            const spanchik=document.getElementById(spanId);
+            if (input.value){
+                spanchik.innerHTML="";
+                return true;//при этом error не меняется
+            }else{
+                spanchik.innerHTML="заполните поле!";
+                if(isScroll){
+                    input.focus();
+                }
+                return false;//error++
+            }
+        }
+    </script>
+</body>
+</html>
