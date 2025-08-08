@@ -58,10 +58,15 @@
         //     }
         // }
         window.addEventListener("load",()=>{//ТАК КАК Я УЖЕ СМОТРЕЛ РАЗБОР ЗАДАНИЯ,РЕШИЛ УСЛОЖНИТЬ И СДНЕЛАТЬ ТОЛЬКО 1 ФУНКЦИЮ
-            const inputs = document.querySelectorAll("input, textarea, select");
+            const inputs = document.querySelectorAll('input[type="text"],input[type="date"], textarea ');//ПОСМОТРНЛ В ИНТЕРНЕТЕ КАК СДЕЛАТЬ ФЕЙКОВОЕ ДЕЙСТВИЕ { target: input }
+            const inputs1 = document.querySelectorAll('input[type="radio"], input[type="checkbox"], select');
             for(let i=0;i<inputs.length;i++){
                 const input=inputs[i];
                 input.addEventListener("blur",validRazr)
+            }
+            for(let i=0;i<inputs1.length;i++){
+                const input=inputs1[i];
+                input.addEventListener("change",validRazr)
             }
             document.forms.validateform.addEventListener('submit',(eo)=>{
                 eo=eo||window.event;
@@ -105,12 +110,12 @@
                             }
                             break;
                         case "radio":
-                            if (elem.value==""){
+                            if (elem.value==1){
                                 spanchik.innerHTML="";
                                 return true;//при этом error не меняется
                             }else{
                                 spanchik.style.color="red";
-                                spanchik.innerHTML="вы должны что-то выьрать!";
+                                spanchik.innerHTML="есть только бесплатное!";
                                 if(isScroll){
                                     elem.focus();
                                 }
@@ -134,7 +139,7 @@
                     }
                     break;
                 case "select":
-                    if (elem.value==2){
+                    if (elem.value=="бытовая техника"){
                         spanchik.innerHTML="";
                         return true;//при этом error не меняется
                     }else{
