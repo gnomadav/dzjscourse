@@ -110,7 +110,8 @@
                             }
                             break;
                         case "radio":
-                            if (elem.value==1){
+                            const checkradio = document.querySelectorAll(`input[name="${elem.name}"]:checked`);
+                            if (checkradio.length > 0){
                                 spanchik.innerHTML="";
                                 return true;//при этом error не меняется
                             }else{
