@@ -7,7 +7,7 @@
 </head>
 <body>
     <script>
-        function scrSpace(str){
+        function scrSpace(str){//a2+
             let start=0;
             let end= str.length - 1;
             while(str[start] === " ") start++;
@@ -16,8 +16,9 @@
         }
         let a = "   afasfasf asfasffa.    ";
         scrSpace(a);
-        function palindrom(str){
-            let res= str.trim().toLowerCase().replace(/[ёеьъ\s]/g, "");//можно создать функцию,но так проще используя рег вырадение
+
+        function palindrom(str){//a3+
+            let res= str.trim().toLowerCase().replace(/[ёеьъ\,!s]/g, "");//можно создать функцию,но так проще используя рег вырадение
             let stroka ="";
             for(let i=res.length - 1;i>=0;i--){
                 let bukva = res[i];
@@ -31,8 +32,8 @@
             console.log(res);
             console.log(stroka);
         }   
-        palindrom("течёт");
-        console.log("b"+"c");
+        let pa ="Он дивен, палиндром, и ни морд ни лап не видно!";
+        palindrom(pa);
     </script>
 </body>
 </html>

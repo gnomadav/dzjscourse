@@ -80,7 +80,8 @@
             p2Up=true;
         }
     })
-    
+    let GameIsActive=false;
+    let interval = null;
     function randomNapr(){
         function getRandom(i) {
         return Math.floor(Math.random() * i);
@@ -93,28 +94,47 @@
     }
     document.addEventListener("keyup",function(event){
         if(event.code === "ArrowDown"){
-            p1Down=false;
+            p2Down=false;
         }
         if(event.code === "ArrowUp"){
-            p1Up=false;
+            p2Up=false;
         }
         if(event.code === "ControlLeft"){
-            p2Down=false;
+            p1Down=false;
         }if(event.code === "ShiftLeft"){
-            p2Up=false;
+            p1Up=false;
         }
     })
     
     function start(){
+        if (GameIsActive) return;
+        GameIsActive=true;
+        ball.posX=0.5*area.width+0.5*ball.width;
+        ball.posY=0.5*area.height+0.5*ball.height;
+        ball.speedX=3;
+        ball.speedY=3;
         randomNapr();
-        setInterval(tick,10);
+        if(interval) clearInterval(interval);
+        interval = setInterval(tick,10);
+    }
+    function stop(){
+        GameIsActive=false;
+        ball.speedX=0;
+        ball.speedY=0;
+        if(interval){
+            clearInterval(interval);
+            GameIsActive=null;
+        }
     }
     function tick(){
+        if (!GameIsActive) return;
         ball.posX+=ball.speedX;
         if(ball.posX + ball.width>area.width){
-            ball.speedX= -ball.speedX;
             ball.posX=area.width-ball.width;
             ball.igrok1++;
+            stop();
+            ball.update();
+            return;
         }
         if(ball.posX <= raketka1.posX + raketka1.width&&
             ball.posX +ball.width >= raketka1.posX&&
@@ -129,9 +149,11 @@
             ball.speedX= -ball.speedX;
         }
         if(ball.posX<0){
-            ball.speedX= -ball.speedX;
             ball.posX=0;
             ball.igrok2++;
+            stop();
+            ball.update();
+            return;
         }
         ball.posY+=ball.speedY;
         if(ball.posY + ball.height>area.height){
