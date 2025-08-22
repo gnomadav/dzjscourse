@@ -18,7 +18,7 @@
         scrSpace(a);
 
         function palindrom(str){//a3+
-            let res= str.trim().toLowerCase().replace(/[ёеьъ\,!s]/g, "");//можно создать функцию,но так проще используя рег вырадение
+            let res= str.trim().toLowerCase().replace(/[^а-яa-z]/g, "");//можно создать функцию,но так проще используя рег вырадение
             let stroka ="";
             for(let i=res.length - 1;i>=0;i--){
                 let bukva = res[i];
