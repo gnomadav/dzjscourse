@@ -69,19 +69,18 @@
     let p2Down=false;
     document.addEventListener("keydown",function(event){
         if(event.code === "ArrowDown"){
-            p1Down=true;
+            p2Down=true;
         }
         if(event.code === "ArrowUp"){
-            p1Up=true;
+            p2Up=true;
         }
         if(event.code === "ControlLeft"){
-            p2Down=true;
+            p1Down=true;
         }if(event.code === "ShiftLeft"){
-            p2Up=true;
+            p1Up=true;
         }
     })
     let GameIsActive=false;
-    let interval = null;
     function randomNapr(){
         function getRandom(i) {
         return Math.floor(Math.random() * i);
@@ -105,7 +104,7 @@
             p1Up=false;
         }
     })
-    
+    let interval = setInterval(tick,10);
     function start(){
         if (GameIsActive) return;
         GameIsActive=true;
@@ -114,16 +113,14 @@
         ball.speedX=3;
         ball.speedY=3;
         randomNapr();
-        if(interval) clearInterval(interval);
-        interval = setInterval(tick,10);
     }
     function stop(){
         GameIsActive=false;
         ball.speedX=0;
         ball.speedY=0;
         if(interval){
-            clearInterval(interval);
             GameIsActive=null;
+            interval=null;
         }
     }
     function tick(){
